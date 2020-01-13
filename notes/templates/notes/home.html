@@ -1,8 +1,10 @@
-<html>
-    <head>
-        <title>Notes</title>
-    </head>
-    <body>
-        <h1>Notes Home</h1>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %} 
+    <h3>This website contains Notes of various branches and semester. We have tried to collect as many notes as possible to kickstart this little project</h3>
+    <p>this is a website made by a medicapsian for medicapsian</p><br>
+    <p>for the time of need and suffering i.e. Semester Exams or Mid-Sems</p><br>
+    {% for post in posts %}
+        <h1> {{ post.title }} </h1>
+        <p> uploaded by {{ post.uploader }} on {{post.date_posted}} </p>
+    {% endfor %}
+{% endblock content %}
