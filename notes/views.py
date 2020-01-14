@@ -1,23 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Notes_Model
 
-# Create your views here.
-
-posts = [
-    {
-        'uploader': 'John Doe',
-        'title': 'Computer Science III sem',
-        'date_posted': 'Jan 12, 2020 ',
-    },
-    {
-        'uploader': 'Joe Doe',
-        'title': 'Mechanical Engineering II sem',
-        'date_posted': 'Jan 14, 2020 ',
-    }
-]
-
-def notes_login(request):
-    context = {'posts': posts}
+def home(request):
+    context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
 
 def about(request):
