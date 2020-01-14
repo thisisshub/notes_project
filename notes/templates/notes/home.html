@@ -7,13 +7,16 @@
             </div>
         {% endfor %}
     {% endif %}
-    {% comment %} <h3>This website contains Notes of various branches and semester. <br>
-        We have tried to collect as many notes as possible to kickstart this little project</h3>
-    <p>this is a website made by a medicapsian for medicapsian</p>
-    <p>for the time of need and suffering i.e. Semester Exams or Mid-Sems</p>
-    {% endcomment %} 
     {% for post in posts %}
-        <h4> {{ post.title }} </h4>
-        <p> uploaded by {{ post.uploader }} on {{post.date_posted}} </p>
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
     {% endfor %}
 {% endblock content %}

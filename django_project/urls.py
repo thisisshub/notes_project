@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,3 +13,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='notes/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='notes/logout.html'), name='logout'),
 ]
+if (settings.DEBUG == True):
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
