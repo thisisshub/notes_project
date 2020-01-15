@@ -25,7 +25,6 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Your Account has been Updated!')
             return redirect('notes-home')
-    
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)       

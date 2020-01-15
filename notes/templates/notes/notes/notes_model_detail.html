@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %} 
+        <article class="media content-section">
+        {% comment %} <img class="rounded-circle article-img" src="{{ object.uploader.profile.image.url }}"> {% endcomment %}
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ object.uploader }}</a>
+              <small class="text-muted">{{ object.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'notes-detail' object.id %}">{{ object.title }}</a></h2>
+            <p class="article-content">{{ object.content }}</p>
+          </div>
+        </article>
+{% endblock content %}
