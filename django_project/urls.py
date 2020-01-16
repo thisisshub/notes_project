@@ -13,5 +13,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='notes/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='notes/logout.html'), name='logout'),
 ]
-if (settings.DEBUG == True):
+if (settings.DEBUG == True):     
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

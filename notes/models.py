@@ -22,7 +22,7 @@ class Notes_Model(models.Model):
     description = models.TextField(max_length=2500)
     branch_choice = models.CharField(max_length=50, choices=branch_choices, default='cse')
     file_semester = models.IntegerField( choices=semester_choice)
-    file = models.FileField(upload_to='documents/')
+    file = models.FileField()
     
 
     def __str__(self):

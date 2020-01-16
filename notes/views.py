@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
-from users.forms import UploadFileForm
+from .forms import UploadFileForm
+from django.contrib import messages
 
 def home(request):
     context = {'posts': Notes_Model.objects.all}
@@ -22,21 +23,15 @@ class PostCreateView(CreateView):
     model = Notes_Model
     # template_name = 'template/notes/notes/note_model_form.html'
     fields = ['title', 'description', 'file_semester', 'branch_choice', 'file']
-    
+
     @login_required
     def upload_file(self, request):
-        if (request.method == 'POST'):
-            form = Notes_Model(request.POST, request.FILES)
+        if request.method == 'POST':
+            form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
-                instance = Notes_Model(file_field=request.FILES['file'])
-                instance.save()
-                return redirect('notes-create')
-            else:
-                pass
-            
-    def form_valid(self, form):
-        form.instance.uploader = self.request.user
-        return super().form_valid(form)
+                form.save()
+                messages.success(request, f'Your files have been uploaded')
+                return redirect('notes-home')    
 
 def about(request):
     title = {'title': 'About'} 
