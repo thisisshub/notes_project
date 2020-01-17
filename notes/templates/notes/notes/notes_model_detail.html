@@ -7,12 +7,8 @@
               <a class="mr-2" href="#">{{ object.uploader }}</a>
               <small class="text-muted">{{ object.date_posted }}</small>
             </div>
-            <h3>Subject</h3>
             <h2><a class="article-title" href="{% url 'notes-detail' object.id %}">{{ object.title }}</a></h2>
-            <p class="article-content">Semester: {{ object.file_semester }}</p>
-            <p class="article-content">Branch: {{ object.branch_choice }}</p>
-            <h3>Description</h3>
-            <p class="article-content">{{ object.description }}</p>
+            <p class="article-content">{{ object.content }}</p>
           </div>
         </article>
 {% endblock content %}
