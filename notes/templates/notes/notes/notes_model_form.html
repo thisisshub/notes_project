@@ -7,7 +7,7 @@
         <title> Notes App </title>
     {% endif %}
     <div class="content-section">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Notes Upload</legend>

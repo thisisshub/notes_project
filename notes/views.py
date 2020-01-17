@@ -15,6 +15,8 @@ from django.contrib.auth.models import User
 
 from django.core.paginator import Paginator
 
+from .filters import NotesFilter
+
 def home(request):
     context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
@@ -23,23 +25,13 @@ def home(request):
 def about(request):
     title = {'title': 'About'} 
     return render(request, template_name='about.html', context=title)
-
-class UserPostListView(ListView):
-    model = Notes_Model
-    template_name = 'template/notes/notes/note_model_list.html'
-    context_object_name = 'posts'
-    paginate_by = 5
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Notes_Model.objects.filter(uploader=user).order_by('-date_posted')    
-
+    
 class PostListView(ListView):
     model = Notes_Model
-    template_name = 'template/notes/notes/note_model_list.html'
+    template_name = 'home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 5
+    paginate_by = 2
 
 class PostDetailView(DetailView):
     model = Notes_Model
@@ -89,3 +81,8 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
         if (self.request.user == self.request.user):
             return True
         return False
+
+def search(request):
+    branch_list = Notes_Model.objects.all()
+    branch_filter = NotesFilter(request.GET, queryset=Notes_Model)
+    return render(request, 'notes/templates/notes/notes/notes_model_filter.html', {'filter': branch_filter})
