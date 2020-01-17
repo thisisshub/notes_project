@@ -17,6 +17,11 @@ from django.core.paginator import Paginator
 
 from .filters import NotesFilter
 
+# file transfer
+import os
+from django.conf import settings
+from django.core.files import File
+
 def home(request):
     context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
@@ -86,3 +91,12 @@ def search(request):
     branch_list = Notes_Model.objects.all()
     branch_filter = NotesFilter(request.GET, queryset=Notes_Model)
     return render(request, 'notes/templates/notes/notes/notes_model_filter.html', {'filter': branch_filter})
+
+def download(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type=None)
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+        raise Http404
