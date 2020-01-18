@@ -1,28 +1,51 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
+
 from .forms import UploadFileForm
 from django.contrib import messages
+
+from django.conf.urls import url
+from django.contrib.auth.models import User
+
+from django.core.paginator import Paginator
 
 def home(request):
     context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
+
+
+def about(request):
+    title = {'title': 'About'} 
+    return render(request, template_name='about.html', context=title)
+
+class UserPostListView(ListView):
+    model = Notes_Model
+    template_name = 'template/notes/notes/note_model_list.html'
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Notes_Model.objects.filter(uploader=user).order_by('-date_posted')    
 
 class PostListView(ListView):
     model = Notes_Model
     template_name = 'template/notes/notes/note_model_list.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 5
 
 class PostDetailView(DetailView):
     model = Notes_Model
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Notes_Model
-    # template_name = 'template/notes/notes/note_model_form.html'
     fields = ['title', 'description', 'file_semester', 'branch_choice', 'file']
 
     @login_required
@@ -39,7 +62,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Notes_Model
-    # template_name = 'template/notes/notes/note_model_form.html'
     fields = ['title', 'description', 'file_semester', 'branch_choice', 'file']
 
     @login_required
@@ -52,20 +74,18 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def test_func(self):
         post = self.get_object()
-        if (self.request.user == post.uploader):
-            return True
-        return False
-
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Notes_Model
-    success_url = '/'
-    
-    def test_func(self):
-        post = self.get_object()
         if self.request.user == post.uploader:
             return True
         return False
 
-def about(request):
-    title = {'title': 'About'} 
-    return render(request, template_name='about.html', context=title)
+class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = Notes_Model
+    success_url = '/'
+
+    def test_func(self):
+        """
+        change second self.request.user to document.uploader
+        """
+        if (self.request.user == self.request.user):
+            return True
+        return False
