@@ -1,4 +1,4 @@
-# Website
+# Medicaps Notes Website
 
 ## What can this website do so far ? 
 
