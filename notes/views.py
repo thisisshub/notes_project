@@ -88,11 +88,12 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Notes_Model
     success_url = '/'
 
-    def test_func(self, request):
+    def test_func(self):
         """
         change second self.request.user to document.uploader
         """
-        if (self.request.user == request.user.username):
+        post = self.get_object()
+        if (self.request.user == self.request.user):
             return True
         return False
 
