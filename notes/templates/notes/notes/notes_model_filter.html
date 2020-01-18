@@ -1,43 +1,35 @@
 {% extends 'base.html' %}
-
-{% load widget_tweaks %}
-
 {% block content %}
   <form method="get">
-    <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
-      <div class="row">
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.username.label_tag }}
-          {% render_field filter.form.username class="form-control" %}
-        </div>
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.first_name.label_tag }}
-          {% render_field filter.form.first_name class="form-control" %}
-        </div>
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.last_name.label_tag }}
-          {% render_field filter.form.last_name class="form-control" %}
-        </div>
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.year_joined.label_tag }}
-          {% render_field filter.form.year_joined class="form-control" %}
-        </div>
-        <div class="form-group col-sm-8 col-md-6">
-          {{ filter.form.groups.label_tag }}
-          <div>
-            {% for choice in filter.form.groups %}
-              <label class="checkbox-inline">
-                {{ choice.tag }} {{ choice.choice_label }}
-              </label>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
-      </button>
-    </div>
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
   </form>
-
-  
+  <ul>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Uploader</th>
+        <th>Description</th>
+        <th>Branch</th>
+        <th>Subject</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for branch in filter.qs %}
+        <tr>
+          <td>{{ branch.uploader }}</td>
+          <td>{{ branch.title }}</td>
+          <td>{{ branch.branch_choice }}</td>
+          <td>{{ branch.description }}</td>
+          <td><i style="font-style: normal;"class="fas fa-download"><a href="{{ branch.file.url }}" download></i></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+  </ul>
+{% endblock %}

@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse, Http404
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView, 
+    UpdateView, 
+    DeleteView
+)
 
 from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
@@ -15,7 +21,10 @@ from django.contrib.auth.models import User
 
 from django.core.paginator import Paginator
 
-from .filters import NotesFilter
+# data filter
+import operator
+from django.db.models import Q
+from django import forms
 
 # file transfer
 import os
@@ -79,18 +88,35 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Notes_Model
     success_url = '/'
 
-    def test_func(self):
+    def test_func(self, request):
         """
         change second self.request.user to document.uploader
         """
-        if (self.request.user == self.request.user):
+        if (self.request.user == request.user.username):
             return True
         return False
 
+
+branch_choice = [
+    ('Computer Science Engineering' ),
+    ('Civil Engineering'),
+    ('Automobile Engineering'),
+    ('Electronics and Communication Engineering'),
+    ('Electrical Engineering'),
+    ('Electronics and Instrumentation'),
+    ('Electrical and Electronics Engineering'),
+    ('Fire and Safety'),
+    ('Information Technology'),
+    ('Mechanical Engineering'),
+]
+
+
+from .filters import NotesFilter
+
 def search(request):
-    branch_list = Notes_Model.objects.all()
-    branch_filter = NotesFilter(request.GET, queryset=Notes_Model)
-    return render(request, 'notes/templates/notes/notes/notes_model_filter.html', {'filter': branch_filter})
+    branch_list = NotesFilter.objects.all()
+    branch_choice_filter = NotesFilter(request.GET, queryset=branch_list)
+    return render(request, 'notes/notes_model_filter.html', {'filter': branch_choice_filter})
 
 def download(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)

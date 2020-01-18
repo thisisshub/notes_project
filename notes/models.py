@@ -3,16 +3,16 @@ from django.contrib.auth.admin import User
 from django.urls import reverse
 
 branch_choices = [
-    ('cse', 'Computer Science Engineering' ),
-    ('ce', 'Civil Engineering	'),
-    ('au', 'Automobile Engineering'),
-    ('ec', 'Electronics and Communication Engineering'),
-    ('ee', 'Electrical Engineering'),
-    ('ex', 'Electronics and Instrumentation'),
-    ('eee', 'Electrical and Electronics Engineering'),
-    ('ft', 'Fire and Safety'),
-    ('it', 'Information Technology'),
-    ('me', 'Mechanical Engineering'),
+    ('Computer Science Engineering', 'Computer Science Engineering' ),
+    ('Civil Engineering', 'Civil Engineering'),
+    ('Automobile Engineering', 'Automobile Engineering'),
+    ('Electronics and Communication Engineering', 'Electronics and Communication Engineering'),
+    ('Electrical Engineering', 'Electrical Engineering'),
+    ('Electronics Engineering', 'Electronics and Instrumentation'),
+    ('Electrical Engineering', 'Electrical and Electronics Engineering'),
+    ('Fire Engineering', 'Fire and Safety'),
+    ('Information Engineering', 'Information Technology'),
+    ('Mechanical Engineering', 'Mechanical Engineering'),
 ]
 semester_choice = [tuple([x,x]) for x in range(1,9)]
 class Notes_Model(models.Model):

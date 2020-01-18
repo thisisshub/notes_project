@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %} 
         <article class="media content-section">
-        {% comment %} <img class="rounded-circle article-img" src="{{ object.uploader.profile.image.url }}"> {% endcomment %}
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ object.uploader }}</a>
@@ -17,6 +16,5 @@
               {% endif %}
           </div>
           <p><a href="{{ object.file.url }}" download>Download</p>
-          {% comment %} <p> {{ object.file.url }}</p> {% endcomment %}
         </article>
 {% endblock content %}

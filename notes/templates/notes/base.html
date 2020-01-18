@@ -25,6 +25,7 @@
             <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
+                <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>  
                 <li><a class="navbar-elements" href="{% url 'notes-create' %}" >UPLOAD</a></li>
                 <li><a class="navbar-elements" href="{% url 'logout' %}" >LOGOUT</a></li>
             {% else %}
