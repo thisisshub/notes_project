@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse, Http404
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView, 
+    UpdateView, 
+    DeleteView
+)
 
 from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
@@ -15,6 +21,16 @@ from django.contrib.auth.models import User
 
 from django.core.paginator import Paginator
 
+# data filter
+import operator
+from django.db.models import Q
+from django import forms
+
+# file transfer
+import os
+from django.conf import settings
+from django.core.files import File
+
 def home(request):
     context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
@@ -23,23 +39,13 @@ def home(request):
 def about(request):
     title = {'title': 'About'} 
     return render(request, template_name='about.html', context=title)
-
-class UserPostListView(ListView):
-    model = Notes_Model
-    template_name = 'template/notes/notes/note_model_list.html'
-    context_object_name = 'posts'
-    paginate_by = 5
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Notes_Model.objects.filter(uploader=user).order_by('-date_posted')    
-
+    
 class PostListView(ListView):
     model = Notes_Model
-    template_name = 'template/notes/notes/note_model_list.html'
+    template_name = 'home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 5
+    paginate_by = 2
 
 class PostDetailView(DetailView):
     model = Notes_Model
@@ -82,10 +88,41 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Notes_Model
     success_url = '/'
 
-    def test_func(self):
+    def test_func(self, request):
         """
         change second self.request.user to document.uploader
         """
-        if (self.request.user == self.request.user):
+        if (self.request.user == request.user.username):
             return True
         return False
+
+
+branch_choice = [
+    ('Computer Science Engineering' ),
+    ('Civil Engineering'),
+    ('Automobile Engineering'),
+    ('Electronics and Communication Engineering'),
+    ('Electrical Engineering'),
+    ('Electronics and Instrumentation'),
+    ('Electrical and Electronics Engineering'),
+    ('Fire and Safety'),
+    ('Information Technology'),
+    ('Mechanical Engineering'),
+]
+
+
+from .filters import NotesFilter
+
+def search(request):
+    branch_list = NotesFilter.objects.all()
+    branch_choice_filter = NotesFilter(request.GET, queryset=branch_list)
+    return render(request, 'notes/notes_model_filter.html', {'filter': branch_choice_filter})
+
+def download(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type=None)
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+        raise Http404
