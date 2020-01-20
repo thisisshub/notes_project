@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
 from django.http import HttpResponse, Http404
+from django.conf.urls import url
+from django.contrib.auth.models import User
+
+# views
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -10,16 +13,13 @@ from django.views.generic import (
     DeleteView
 )
 
+# models
 from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
 
+# forms
 from .forms import UploadFileForm
 from django.contrib import messages
-
-from django.conf.urls import url
-from django.contrib.auth.models import User
-
-from django.core.paginator import Paginator
 
 # data filter
 import operator
@@ -31,26 +31,43 @@ import os
 from django.conf import settings
 from django.core.files import File
 
+# filters 
+from .filters import NotesFilter
+
 def home(request):
+    """
+    Displays home page requests.
+    """
     context = {'posts': Notes_Model.objects.all}
     return render(request, template_name='home.html', context=context)
 
 
 def about(request):
+    """
+    Displays about page requests.
+    """
     title = {'title': 'About'} 
     return render(request, template_name='about.html', context=title)
     
 class PostListView(ListView):
+    """
+    Orders the homepage in a better (list) view
+    """
     model = Notes_Model
     template_name = 'home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 2
+    
+    # Paginates the homepage by two posts per page
+    paginate_by = 5
 
 class PostDetailView(DetailView):
     model = Notes_Model
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    """
+    Lets user upload files under the UPLOAD navigation button
+    """
     model = Notes_Model
     fields = ['title', 'description', 'file_semester', 'branch_choice', 'file']
 
@@ -67,6 +84,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.uploader = self.request.user
         return super().form_valid(form)
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    Lets user update a post
+    """
     model = Notes_Model
     fields = ['title', 'description', 'file_semester', 'branch_choice', 'file']
 
@@ -85,6 +105,9 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    """
+    Deletes authenticated user posts.
+    """
     model = Notes_Model
     success_url = '/'
 
@@ -110,9 +133,6 @@ branch_choice = [
     ('Information Technology'),
     ('Mechanical Engineering'),
 ]
-
-
-from .filters import NotesFilter
 
 def search(request):
     branch_list = NotesFilter.objects.all()
