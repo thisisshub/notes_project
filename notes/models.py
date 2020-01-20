@@ -14,6 +14,8 @@ branch_choices = [
     ('Information Engineering', 'Information Technology'),
     ('Mechanical Engineering', 'Mechanical Engineering'),
 ]
+
+# notes semester choice from 1 to 8
 semester_choice = [tuple([x,x]) for x in range(1,9)]
 class Notes_Model(models.Model):
     uploader = models.CharField(max_length=200)

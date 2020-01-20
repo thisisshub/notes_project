@@ -1,6 +1,16 @@
 from django.urls import path, include
-from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, search
+
+# views
 from . import views 
+from .views import (PostListView, 
+    PostDetailView, 
+    PostCreateView, 
+    PostUpdateView, 
+    PostDeleteView, 
+    search
+)
+
+# filters 
 from .filters import NotesFilter
 from django_filters.views import FilterView
 
