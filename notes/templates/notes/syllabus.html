@@ -1,32 +1,15 @@
 {% extends 'base.html' %}
-<<<<<<< HEAD
 {% block content %}
-=======
-
-{% block content %}  
-
-<form method="get">
-    {{ filter.form.as_p }}
-    {% comment %} <button type="submit">Search</button> {% endcomment %}
-  </form>
->>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
   <ul>
 <table class="table table-bordered">
     <thead>
       <tr>
-<<<<<<< HEAD
         <th>Branch</th>
-=======
-        {% comment %} <th>Uploader</th> {% endcomment %}
-        {% comment %} <th>Description</th> {% endcomment %}
-        <th>Syllabus</th>
->>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
         <th>Semester</th>
         <th>Download</th>
       </tr>
     </thead>
     <tbody>
-<<<<<<< HEAD
         <tr>
           <td>Computer Science</td>
           <td>III</td>
@@ -40,21 +23,4 @@
     </tbody>
   </table>  
   </ul>
-=======
-      {% comment %} {% for branch in filter.qs %} {% endcomment %}
-        <tr>
-          {% comment %} <td>{{ branch.uploader }}</td> {% endcomment %}
-          {% comment %} <td>{{ branch.title }}</td> {% endcomment %}
-          <td>Computer Science</td>
-          <td>I</td>
-          <td><i style="font-style: normal;"class="fas fa-download"><a href="{{ branch.file.url }}" download></i></td>
-        </tr>
-      {% comment %} {% empty %} {% endcomment %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% comment %} {% endfor %} {% endcomment %}
-    </tbody>
-  </table>  
->>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
 {% endblock %}
