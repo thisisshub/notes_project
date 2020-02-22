@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "~/devel/personal/django_project/bin/python",
+=======
+    "python.pythonPath": "~/devel/personal/django-project/bin/python",
+>>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
     "git.ignoreLimitWarning": true
 }

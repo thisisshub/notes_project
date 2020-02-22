@@ -149,4 +149,9 @@ def download(request, path):
         raise Http404
 
 def syllabus(request):
+<<<<<<< HEAD
     return render(request, template_name='syllabus.html')
+=======
+    return render(request, template_name='syllabus.html')
+    
+>>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
