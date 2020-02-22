@@ -18,6 +18,7 @@ urlpatterns = [
     path('', PostListView.as_view(), name='notes-home'),
     path('notes/new/', PostCreateView.as_view(), name='notes-create'),
     path('filter/', FilterView.as_view(filterset_class=NotesFilter, template_name='notes/templates/notes/notes/notes_model_filter.html'), name='notes-filter'),
+    path('about/', views.syllabus, name='syllabus'),
     path('notes/<int:pk>', PostDetailView.as_view(), name='notes-detail'),
     path('notes/<int:pk>/update/', PostUpdateView.as_view(), name='notes-update'),
     path('notes/<int:pk>/delete/', PostDeleteView.as_view(), name='notes-delete'),

@@ -23,6 +23,7 @@
         <ul>
             <li><a class="navbar-elements" href="{% url 'notes-home' %}">HOME</li>  
             <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
+            <li><a class="navbar-elements" href="{% url 'syllabus' %}">SYLLABUS</a></li>
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
                 <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>  

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <ul>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Branch</th>
+        <th>Semester</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Computer Science</td>
+          <td>III</td>
+          <td><i style="font-style: normal;"class="fas fa-download"><a href="{{ branch.file.url }}" download></i></td>
+        </tr>
+        <tr>
+          <td>Mechanical Engineering</td>
+          <td>IV</td>
+          <td><i style="font-style: normal;"class="fas fa-download"><a href="{{ branch.file.url }}" download></i></td>
+        </tr>
+    </tbody>
+  </table>  
+  </ul>
+{% endblock %}
