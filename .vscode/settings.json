@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/home/shubi3/devel/personal/django-project/bin/python",
+    "python.pythonPath": "~/devel/personal/django-project/bin/python",
     "git.ignoreLimitWarning": true
 }

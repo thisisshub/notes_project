@@ -25,7 +25,7 @@ class Notes_Model(models.Model):
     branch_choice = models.CharField(max_length=50, choices=branch_choices, default='cse')
     file_semester = models.IntegerField( choices=semester_choice)
     file = models.FileField()
-    
+    syllabus = models.TextField(max_length=200, default='No Syllabus Availibe Yet')
 
     def __str__(self):
         return self.title

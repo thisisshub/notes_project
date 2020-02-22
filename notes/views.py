@@ -147,3 +147,7 @@ def download(request, path):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
         raise Http404
+
+def syllabus(request):
+    return render(request, template_name='syllabus.html')
+    

@@ -23,6 +23,7 @@
         <ul>
             <li><a class="navbar-elements" href="{% url 'notes-home' %}">HOME</li>  
             <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
+            <li><a class="navbar-elements" href="{% url 'syllabus' %}" >SYLLABUS</a></li>
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
                 <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>  
@@ -42,8 +43,7 @@
     <!-- About Section -->
     <div class="footer">
         <p>--------------------------------------------------------------</p>
-
-        <p> Made with <3 by Shubhashish</p>
+        <p> Made by Team Corona Virus </p>
     </div>
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

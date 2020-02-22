@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+
+<form method="get">
+    {{ filter.form.as_p }}
+    {% comment %} <button type="submit">Search</button> {% endcomment %}
+  </form>
+  <ul>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        {% comment %} <th>Uploader</th> {% endcomment %}
+        {% comment %} <th>Description</th> {% endcomment %}
+        <th>Syllabus</th>
+        <th>Semester</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% comment %} {% for branch in filter.qs %} {% endcomment %}
+        <tr>
+          {% comment %} <td>{{ branch.uploader }}</td> {% endcomment %}
+          {% comment %} <td>{{ branch.title }}</td> {% endcomment %}
+          <td>Computer Science</td>
+          <td>I</td>
+          <td><i style="font-style: normal;"class="fas fa-download"><a href="{{ branch.file.url }}" download></i></td>
+        </tr>
+      {% comment %} {% empty %} {% endcomment %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% comment %} {% endfor %} {% endcomment %}
+    </tbody>
+  </table>  
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-# views
+# viewssyllabus
 from . import views 
 from .views import (PostListView, 
     PostDetailView, 
@@ -21,5 +21,6 @@ urlpatterns = [
     path('notes/<int:pk>', PostDetailView.as_view(), name='notes-detail'),
     path('notes/<int:pk>/update/', PostUpdateView.as_view(), name='notes-update'),
     path('notes/<int:pk>/delete/', PostDeleteView.as_view(), name='notes-delete'),
+    path('syllabus/', views.syllabus, name='syllabus'),
     path('about/', views.about, name='notes-about'),
 ]
