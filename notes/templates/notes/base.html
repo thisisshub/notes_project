@@ -22,20 +22,18 @@
     <nav id="nav">
         <ul>
             <li><a class="navbar-elements" href="{% url 'notes-home' %}">HOME</li>  
-            <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
-            {% comment %} <li><a class="navbar-elements" href="{% url 'web-gen' %}">WEB-GEN</a></li> {% endcomment %}
             <li><a class="navbar-elements" href="{% url 'syllabus' %}">SYLLABUS</a></li>
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
                 <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>
-                <li><a class="navbar-elements" href="{% url 'web_gen' %}">WEB GEN</li>  
+                <li><a class="navbar-elements" href="{% url 'webgen' %}">WEB GEN</li>  
                 <li><a class="navbar-elements" href="{% url 'notes-create' %}" >UPLOAD</a></li>
                 <li><a class="navbar-elements" href="{% url 'logout' %}" >LOGOUT</a></li>
             {% else %}
                 <li><a class="navbar-elements" href="{% url 'user-register' %}" >SIGNUP</a></li>
                 <li><a class="navbar-elements" href="{% url 'login' %}" >LOGIN</a></li>
             {% endif %}
-            <li><a class="navbar-elements" href="http://127.0.0.1:8000/"><i class="fa fa-search" aria-hidden="true"></i></a></li>  
+            <li><a class="navbar-elements" href="http://127.0.0.1:5000/"><i class="fa fa-search" aria-hidden="true"></i></a></li>  
         </ul>
     </nav>
     </div>

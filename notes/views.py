@@ -14,7 +14,7 @@ from django.views.generic import (
 )
 
 # models
-from .models import Notes_Model
+from .models import Notes_Model, Web
 from django.contrib.auth.decorators import login_required
 
 # forms
@@ -177,4 +177,4 @@ def webgen(req):
 
         web = Web(title=title,year=year,chancellor=chancellor)
         web.save()
-        return HttpResponse('Uploaded')
+        return render(req, template_name='medi1.html')
