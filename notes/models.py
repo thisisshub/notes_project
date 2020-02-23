@@ -25,7 +25,7 @@ class Notes_Model(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     description = models.TextField(max_length=2500)
     branch_choice = models.CharField(max_length=50, choices=branch_choices, default='cse')
-    file_semester = models.IntegerField( choices=semester_choice)
+    file_semester = models.IntegerField( choices=semester_choice, blank=True)
     file = models.FileField()
     syllabus = models.TextField(max_length=200, default='No Syllabus Availibe Yet')
 
@@ -35,33 +35,15 @@ class Notes_Model(models.Model):
     def get_absolute_url(self):
         return reverse("notes-detail", kwargs={"pk": self.pk})
 
-# class Comment(models.Model):
-#     post = models.ForeignKey(Notes_Model, on_delete=models.CASCADE, related_name='comments', default=None)
-#     author = models.CharField(max_length=200)
-#     text = models.TextField(max_length=200)
-#     reply = models.ForeignKey('Comment', null=True, related_name="replies", on_delete=models.CASCADE)
-#     created_date = models.DateTimeField(default=timezone.now)
-#     approved_comment = models.BooleanField(default=False)
+establishment_choice = [tuple([x,x]) for x in range(1100,2021)]
 
-#     def approve(self):
-#         self.approved_comment = True
-#         self.save()
+class Web(models.Model):
+    title = models.TextField(max_length=200)
+    year = models.IntegerField(choices=establishment_choice, blank=False)
+    chancellor = models.TextField(max_length=200)
 
-#     def __str__(self):
-#         return self.text
-
-#     def approved_comments(self):
-#         return self.comments.filter(approved_comment=True)
-
-class Website_Gen(models.Model):
-    c_name = models.TextField(max_length=200)
-    date_established = models.DateTimeField(auto_now_add=False)
-    files = models.FileField()
-    syllabus = models.TextField(max_length=200, default="No Syllabus Availible Yet") 
-    branch_availible = models.TextField(max_length=500)
-    
     def __str__(self):
-        return self.c_name
+        return self.title
     
     def get_absolute_url(self):
-        return reverse("web-gen", kwargs={"pk": self.pk})
+        return reverse("Web", kwargs={"pk": self.pk})

@@ -10,12 +10,11 @@ from django.conf.urls.static import static
 
 # settings
 from django.conf import settings
-# from simple-django-searchengine.tkcbise import urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes.urls')),
-    path('search/', include('simple-django-searchengine.tkcbise.urls')),
     path('signup/', user_views.register, name='user-register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='notes/login.html'), name='login'),

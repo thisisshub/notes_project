@@ -5,10 +5,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static '/notes/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static '/notes/style.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-    
+
     <!-- title -->
     {% if title %}
         <title> Notes - {{ title }} </title>
@@ -23,17 +23,19 @@
         <ul>
             <li><a class="navbar-elements" href="{% url 'notes-home' %}">HOME</li>  
             <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
-            <li><a class="navbar-elements" href="{% url 'web-gen' %}">WEB-GEN</a></li>
+            {% comment %} <li><a class="navbar-elements" href="{% url 'web-gen' %}">WEB-GEN</a></li> {% endcomment %}
             <li><a class="navbar-elements" href="{% url 'syllabus' %}">SYLLABUS</a></li>
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
-                <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>  
+                <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>
+                {% comment %} <li><a class="navbar-elements" href="{% url 'web_gen' %}">WEB GEN</li>   {% endcomment %}
                 <li><a class="navbar-elements" href="{% url 'notes-create' %}" >UPLOAD</a></li>
                 <li><a class="navbar-elements" href="{% url 'logout' %}" >LOGOUT</a></li>
             {% else %}
                 <li><a class="navbar-elements" href="{% url 'user-register' %}" >SIGNUP</a></li>
                 <li><a class="navbar-elements" href="{% url 'login' %}" >LOGIN</a></li>
             {% endif %}
+            <li><a class="navbar-elements" href="http://127.0.0.1:8080/"><i class="fa fa-search" aria-hidden="true"></i></a></li>  
         </ul>
     </nav>
     </div>
