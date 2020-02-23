@@ -29,7 +29,13 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'social_django',
     'crispy_forms',
+    'django_code_generator',
+    # 'threadedcomments',
+    # 'django_comments',
+    # 'django.contrib.sites',
 ]
+
+# COMMENTS_APP = 'comments'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

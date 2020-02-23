@@ -2,12 +2,15 @@ from django.urls import path, include
 
 # viewssyllabus
 from . import views 
-from .views import (PostListView, 
+
+from .views import (
+    PostListView, 
     PostDetailView, 
     PostCreateView, 
     PostUpdateView, 
     PostDeleteView, 
-    search
+    search,
+    web_gen
 )
 
 # filters 
@@ -21,6 +24,7 @@ urlpatterns = [
     path('about/', views.syllabus, name='syllabus'),
     path('notes/<int:pk>', PostDetailView.as_view(), name='notes-detail'),
     path('notes/<int:pk>/update/', PostUpdateView.as_view(), name='notes-update'),
+    path('website/<int:pk>/gen/', web_gen, name='web-gen'),
     path('notes/<int:pk>/delete/', PostDeleteView.as_view(), name='notes-delete'),
     path('syllabus/', views.syllabus, name='syllabus'),
     path('about/', views.about, name='notes-about'),

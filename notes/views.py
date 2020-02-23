@@ -34,6 +34,10 @@ from django.core.files import File
 # filters 
 from .filters import NotesFilter
 
+# bs4
+from bs4 import BeautifulSoup
+# from .models import Website_Gen
+
 def home(request):
     """
     Displays home page requests.
@@ -121,6 +125,7 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
         return False
 
 
+
 branch_choice = [
     ('Computer Science Engineering' ),
     ('Civil Engineering'),
@@ -149,9 +154,8 @@ def download(request, path):
         raise Http404
 
 def syllabus(request):
-<<<<<<< HEAD
     return render(request, template_name='syllabus.html')
-=======
-    return render(request, template_name='syllabus.html')
-    
->>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
+
+
+def web_gen(request):
+    return render(request, template_name='web_gen.html')

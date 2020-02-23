@@ -23,11 +23,8 @@
         <ul>
             <li><a class="navbar-elements" href="{% url 'notes-home' %}">HOME</li>  
             <li><a class="navbar-elements" href="{% url 'notes-about' %}">ABOUT</li>  
-<<<<<<< HEAD
+            <li><a class="navbar-elements" href="{% url 'web-gen' %}">WEB-GEN</a></li>
             <li><a class="navbar-elements" href="{% url 'syllabus' %}">SYLLABUS</a></li>
-=======
-            <li><a class="navbar-elements" href="{% url 'syllabus' %}" >SYLLABUS</a></li>
->>>>>>> c92ef8aa0ad3106c4ab17fd825de2fa2ee76cebb
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
                 <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>  
