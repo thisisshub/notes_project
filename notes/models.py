@@ -41,9 +41,11 @@ class Web(models.Model):
     title = models.TextField(max_length=200)
     year = models.IntegerField(choices=establishment_choice, blank=False)
     chancellor = models.TextField(max_length=200)
+    # email = models.EmailField(label_(""), max_length=254)
 
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
         return reverse("Web", kwargs={"pk": self.pk})
+

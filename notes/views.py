@@ -18,7 +18,7 @@ from .models import Notes_Model
 from django.contrib.auth.decorators import login_required
 
 # forms
-from .forms import UploadFileForm
+from .forms import UploadFileForm, WebForm
 from django.contrib import messages
 
 # data filter
@@ -159,3 +159,22 @@ def syllabus(request):
 
 def web_gen(request):
     return render(request, template_name='web_gen.html')
+
+def get_name(request):
+    if request.method == "POST":
+        form = WebForm(request.POST)
+        if form.is_valid():
+            return HttpResponse('Thanks for making a website with us!')
+        else:
+            form = WebForm()
+        return render(request, 'web_gen.html', {'form': form})
+
+def webgen(req):
+    if req.method == 'POST':
+        title = req.POST['title']
+        year = req.POST['year']
+        chancellor = req.POST['chancellor']
+
+        web = Web(title=title,year=year,chancellor=chancellor)
+        web.save()
+        return HttpResponse('Uploaded')

@@ -28,14 +28,14 @@
             {% if user.is_authenticated %}
                 <li><a class="navbar-elements" href="{% url 'profile' %}">PROFILE</a></li>
                 <li><a class="navbar-elements" href="{% url 'notes-filter' %}">FILTER</li>
-                {% comment %} <li><a class="navbar-elements" href="{% url 'web_gen' %}">WEB GEN</li>   {% endcomment %}
+                <li><a class="navbar-elements" href="{% url 'web_gen' %}">WEB GEN</li>  
                 <li><a class="navbar-elements" href="{% url 'notes-create' %}" >UPLOAD</a></li>
                 <li><a class="navbar-elements" href="{% url 'logout' %}" >LOGOUT</a></li>
             {% else %}
                 <li><a class="navbar-elements" href="{% url 'user-register' %}" >SIGNUP</a></li>
                 <li><a class="navbar-elements" href="{% url 'login' %}" >LOGIN</a></li>
             {% endif %}
-            <li><a class="navbar-elements" href="http://127.0.0.1:8080/"><i class="fa fa-search" aria-hidden="true"></i></a></li>  
+            <li><a class="navbar-elements" href="http://127.0.0.1:8000/"><i class="fa fa-search" aria-hidden="true"></i></a></li>  
         </ul>
     </nav>
     </div>
