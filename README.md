@@ -7,6 +7,8 @@
 - Upload Notes
 - Download Notes
 - Filter Notes [ on the basis of branch and semester wise ]
+- Search articles on custom search engine
+- Convert markdown to HTML
 
 #### Authentication
 - Signup a User
@@ -32,7 +34,7 @@ Feel free to pull some requests that maybe useful or neccessary for the website
 **NOTE:** Please push the code to alpha branch.
 
 # TODOs
- - [ ] Remove Dependency Vulnerabilities
- - [ ] Add More Filters
- - [ ] Clean Code
+ - [x] Remove Dependency Vulnerabilities
+ - [x] Add More Filters
+ - [x] Clean Code
  - [ ] Improve UI
