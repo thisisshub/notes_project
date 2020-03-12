@@ -1,9 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
 <form action="POST">
-<label>Title</label>
-<input type="text" name="title" placeholder="title" >
-<label>year</label>
-<input type="text" name="year" placeholder="title" >
-<label>Chancellor</label>
-<input type="text" name="chancellor" placeholder="title" >
-
+    <label>Title</label>
+    <input type="text" name="title" placeholder="title" >
+    <label>Year</label>
+    <input type="text" name="year" placeholder="title" >
+    <label>Chancellor</label>
+    <input type="text" name="chancellor" placeholder="title">
+    <button type="submit" form="form1" value="Submit">Submit</button> 
 </form>
+
+<p align="centre"><font size="5" color="blue"> Medicaps University </font size></p><hr/>
+<font size="4" color="red">establishment</font size>         - in 2000 <br>
+<font size="4" color="red">chanceller</font size>            - Shree R.C.Mittal <br>
+<font size="4" color="red">vice-chanceller</font size>       - Shree Sunil.K.Somani <br>
+<font size="4" color="red">undergraduate courses</font size><br> - B.tech/B.E [In computer science,civil,mechanical,automobile,electronicsand communication,fire technology] <br>
+                        BBA [marketing,finance,human resourcce,foreign trade,digitalmarketing]<br>
+                        B.Sc[agriculture,forensic science , computer science]<br>
+                        B.Pharma <br> 
+                        B.Com <br>
+<font size="4" color="red">postgraduation courses</font size><br>- M.tech/M.E[computer science,civil,mechanical,electrical,Info. Technology,nano tehnology,automobile]<br>
+                        M.Sc [ applied mathematics,chemistry,physics]
+</body>
+
+{% endblock content %}
